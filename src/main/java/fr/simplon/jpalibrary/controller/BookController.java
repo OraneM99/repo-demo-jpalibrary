@@ -1,0 +1,50 @@
+package fr.simplon.jpalibrary.controller;
+
+import fr.simplon.jpalibrary.model.Book;
+import fr.simplon.jpalibrary.repository.BookRepository;
+import fr.simplon.jpalibrary.service.BookService;
+import org.apache.coyote.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/books")
+public class BookController {
+
+    @Autowired
+    private BookRepository bookRepository;
+    @Autowired
+    private BookService bookService;
+
+    @GetMapping("/{bookId}")
+    public Book getBook(@PathVariable("bookId") Long id) {
+        return bookRepository.findBookById(id);
+    }
+
+    @GetMapping
+    public List<Book> getAllBooks() {
+        return bookService.findAll();
+    }
+
+    @PostMapping
+    public ResponseEntity<Book> createBook(@RequestBody Book book) {
+        Book savedBook = bookService.add(book);
+        return new ResponseEntity<>(savedBook, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{bookId}")
+    public ResponseEntity<Book> updateBook(@PathVariable Long bookId, @RequestBody Book book) {
+        Book updatedBook = bookService.update(bookId, book);
+        return new ResponseEntity<>(updatedBook, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{bookId}")
+    public ResponseEntity<Book> deleteBook(@PathVariable Long bookId) {
+        Book deletedBook = bookService.delete(bookId);
+        return new ResponseEntity<>(deletedBook, HttpStatus.OK);
+    }
+}
