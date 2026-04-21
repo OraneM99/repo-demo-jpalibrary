@@ -2,6 +2,8 @@ package fr.simplon.jpalibrary.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity(name = "book")
 public class Book {
 
@@ -12,11 +14,18 @@ public class Book {
     @Column(nullable = false, length = 100)
     private String title;
 
-    @Column(nullable = true)
     private String description;
 
     @Column(columnDefinition = "BOOLEAN DEFAULT true")
     private Boolean available = true;
+
+    @OneToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @OneToMany
+    @JoinColumn(name = "author_id")
+    private List<Author> authors;
 
     public Book() {}
 
@@ -55,5 +64,21 @@ public class Book {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
     }
 }
