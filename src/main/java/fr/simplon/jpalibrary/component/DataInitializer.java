@@ -28,9 +28,9 @@ public class DataInitializer implements CommandLineRunner {
 
             bookRepository.saveAll(Arrays.asList(book1, book2, book3, book4));
 
-            System.out.println("Base de donnéess intialisée avec succès.");
+            System.out.println("Données intialisées avec succès.");
         } else {
-            System.out.println("Base de données non initialisée ...");
+            System.out.println("Données non intialisées.");
         }
     }
 }

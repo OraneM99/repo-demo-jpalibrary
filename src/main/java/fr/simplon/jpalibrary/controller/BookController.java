@@ -3,7 +3,7 @@ package fr.simplon.jpalibrary.controller;
 import fr.simplon.jpalibrary.model.Book;
 import fr.simplon.jpalibrary.repository.BookRepository;
 import fr.simplon.jpalibrary.service.BookService;
-import org.apache.coyote.Response;
+import fr.simplon.jpalibrary.service.impl.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,14 +20,14 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping("/{bookId}")
-    public Book getBook(@PathVariable("bookId") Long id) {
-        return bookRepository.findBookById(id);
-    }
-
     @GetMapping
     public List<Book> getAllBooks() {
         return bookService.findAll();
+    }
+
+    @GetMapping("/{bookId}")
+    public Book getBook(@PathVariable("bookId") Long id) {
+        return bookRepository.findBookById(id);
     }
 
     @PostMapping
