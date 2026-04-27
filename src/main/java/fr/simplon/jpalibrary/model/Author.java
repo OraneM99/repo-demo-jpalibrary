@@ -1,5 +1,6 @@
 package fr.simplon.jpalibrary.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -12,11 +13,16 @@ public class Author {
     private String nom;
     private String prenom;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "book_id")
+    @ManyToMany(mappedBy = "authors")
+    @JsonIgnore
     private List<Book> books;
 
     public Author() {
+    }
+
+    public Author(String nom, String prenom) {
+        this.nom = nom;
+        this.prenom = prenom;
     }
 
     public Long getId() {

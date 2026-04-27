@@ -1,5 +1,6 @@
 package fr.simplon.jpalibrary.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -12,11 +13,12 @@ public class Category {
     private Long id;
     private String nom;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name ="book_id")
-    private List<Book> book;
+    @OneToMany(mappedBy = "category")
+    @JsonIgnore
+    private List<Book> books;
 
     public Category() {
+
     }
 
     public Long getId() {
@@ -36,10 +38,10 @@ public class Category {
     }
 
     public List<Book> getBook() {
-        return book;
+        return books;
     }
 
-    public void setBook(List<Book> book) {
-        this.book = book;
+    public void setBook(List<Book> books) {
+        this.books = books;
     }
 }
