@@ -57,14 +57,6 @@ public class BookServiceImpl implements BookService {
         return requestCategory;
     }
 
-
-    @Override
-    public List<Book> findAll() {
-        return bookRepository.findAll().stream()
-                .distinct()
-                .toList();
-    }
-
     @Override
     public Book add(Book bookRequest) {
 

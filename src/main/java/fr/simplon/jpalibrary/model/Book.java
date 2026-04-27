@@ -1,5 +1,6 @@
 package fr.simplon.jpalibrary.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -33,11 +34,6 @@ public class Book {
     private List<Author> authors = new ArrayList<>();
 
     public Book() {}
-
-    public Book(String title, String description) {
-        this.title = title;
-        this.description = description;
-    }
 
     public Long getId() {
         return id;

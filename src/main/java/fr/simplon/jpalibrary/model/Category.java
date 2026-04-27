@@ -37,11 +37,11 @@ public class Category {
         this.nom = nom;
     }
 
-    public List<Book> getBook() {
+    public List<Book> getBooks() {
         return books;
     }
 
-    public void setBook(List<Book> books) {
+    public void setBooks(List<Book> books) {
         this.books = books;
     }
 }
